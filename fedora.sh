@@ -44,6 +44,20 @@ sudo dnf install pulseaudio-utils -y
 sudo dnf install alsa-utils -y
 sudo dnf install nmap -y
 
+#fonts
+echo "
+-------------------
+instalar nerd-fonts
+-------------------
+"
+sudo mkdir /usr/local/share/fonts/ms_fonts
+unzip Hack-v3.003-ttf.zip
+sudo mv ttf/*.ttf /usr/local/share/fonts/ms_fonts
+sudo chown root:staff /usr/local/share/fonts/ms_fonts -R
+sudo chmod 644 /usr/local/share/fonts/ms_fonts/* -R
+sudo chmod 755 /usr/local/share/fonts/ms_fonts
+sudo fc-cache -fv
+
 #localhost
 echo "
 -------------------------------
@@ -67,6 +81,21 @@ sudo dnf install zsh -y
 zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
 
+#edicao de imagem e video
+echo "
+-------------------------------------
+instalar gimp, kdenlive && Obs-Studio
+-------------------------------------
+"
+#gimp
+sudo dnf install gimp -y
+
+#kdenlive
+flatpak install --from https://flathub.org/repo/appstream/org.kde.kdenlive.flatpakref -y
+
+#obs-studio
+sudo dnf install obs-studio -y
+
 #neovim
 echo "
 -----------------
@@ -79,7 +108,6 @@ sudo dnf install neovim nodejs git -y
 cd .config/
 mkdir nvim
 cd ~
-git clone https://github.com/emanuelman/Projeto-Fedora.git
 cd Projeto-Fedora/
 mv init.vim ~/.config/nvim
 mv coc-setting.jason ~/.config/nvim
