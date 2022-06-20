@@ -78,7 +78,12 @@ pip install pynvim -y
 sudo dnf install neovim nodejs git -y
 cd .config/
 mkdir nvim
-cd nvim/
+cd ~
+git clone https://github.com/emanuelman/Projeto-Fedora.git
+cd Projeto-Fedora/
+mv init.vim ~/.config/nvim
+mv coc-setting.jason ~/.config/nvim
+#lembre-se de etrar no arquivo init.vim e dar o comando :PlugInstall
 
 #bspwm
 sudo dnf install -y git inxi && cd /tmp && git clone https://github.com/thespation/dpux_bspwm && chmod 755 dpux_bspwm/* -R && cd dpux_bspwm/ && ./instalar.sh
