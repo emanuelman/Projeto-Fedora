@@ -55,9 +55,9 @@ sudo dnf install nmap -y
 
 # --> edicao de imagem e video
 echo "
------------------------------------
-instalar gimp, kdenlive, Obs-Studio
------------------------------------
+------------------------------------------------
+instalar gimp, kdenlive, Obs-Studio && FlameShot
+------------------------------------------------
 "
 sleep 1s
 #gimp
@@ -66,6 +66,8 @@ sudo dnf install gimp -y
 flatpak install --from https://flathub.org/repo/appstream/org.kde.kdenlive.flatpakref -y
 #obs-studio
 sudo dnf install obs-studio -y
+#flameshot
+sudo dnf install flameshot -y
 
 # --> fonts
 echo "
@@ -105,21 +107,39 @@ echo "Congigure o zsh..."
 zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
 
-# --> neovim
+# --> neovim && vim
 echo "
------------------
-instalar o neovim
------------------
+------------------------
+instalar o neovim && vim
+------------------------
 "
 sleep 1s
+#dependencias
 sudo dnf install python3-pip -y
 pip install pynvim -y
 sudo dnf install neovim nodejs git -y
+#neovim
+cd ~
+#instalar o plug para o neovim
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+#configurar
 mkdir .config/nvim/
 cd Projeto-Fedora/
 mv init.vim ~/.config/nvim
-mv coc-setting.jason ~/.config/nvim
+cp coc-settings.json ~/.config/nvim
 #lembre-se de etrar no arquivo init.vim e dar o comando :PlugInstall
+#vim
+cd ~
+#instalar o plug para o vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#configurar
+rm -f .vimrc
+cd Projeto-Fedora/
+mv .vimrc ~
+mv coc-settings.json ~
+#lembre-se de etrar no arquivo vimrc e dar o comando :PlugInstall
 
 echo "
 -----------------------
@@ -130,6 +150,8 @@ sleep 1s
 cd ~
 mv Personal/ ~/Desktop
 mv Utilitarios-Terminal/ ~/Documents
+ln -s ~/Desktop/Personal/Calistenia calistenia
+ln -s ~/Desktop/Personal/Estudos estudos
 
 echo "
 --------------------------------------
