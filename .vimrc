@@ -1,6 +1,5 @@
 
-" Save as sudo
-"ca w!! w !sudo tee "%"
+":w !sudo tee % (password)"
 
 call plug#begin()
 Plug 'sainnhe/sonokai'
@@ -283,3 +282,4 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+

@@ -19,9 +19,9 @@ dnf repolist | grep rpmfusion
 
 # --> navegadores
 echo "
--------------------------------------
-instalar google, brave && qutebrowser
--------------------------------------
+-------------------------------------------------
+instalar google, brave, qutebrowser && torbrowser
+-------------------------------------------------
 "
 sleep 1s
 #google
@@ -34,6 +34,17 @@ sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc 
 sudo dnf install brave-browser -y
 #qutebrowser
 sudo dnf install qutebrowser -y
+#torbrowser
+sudo dnf install torbrowser-launcher
+
+# --> redes sociais
+echo "
+--------
+telegram
+--------
+"
+sleep 1s
+sudo dnf install telegram-desktop -y
 
 # --> utilitarios do terminal
 echo "
@@ -52,6 +63,7 @@ sudo dnf install weechat -y
 sudo dnf install pulseaudio-utils -y
 sudo dnf install alsa-utils -y
 sudo dnf install nmap -y
+sudo dnf install youtube-dl -y
 
 # --> edicao de imagem e video
 echo "
@@ -81,7 +93,9 @@ sudo mv ttf/*.ttf /usr/local/share/fonts/ms_fonts
 sudo chown root:staff /usr/local/share/fonts/ms_fonts -R
 sudo chmod 644 /usr/local/share/fonts/ms_fonts/* -R
 sudo chmod 755 /usr/local/share/fonts/ms_fonts
+cd /usr/local/share/fonts/ms_fonts
 sudo fc-cache -fv
+cd ~
 
 # --> lamp
 echo "
@@ -142,6 +156,16 @@ mv coc-settings.json ~
 #lembre-se de etrar no arquivo vimrc e dar o comando :PlugInstall
 
 echo "
+------
+python
+------
+"
+sleep 1s
+pip install pyautogui
+pip install pandas
+pip install flask
+sudo yum install python3-tkinter
+echo "
 -----------------------
 organizar os diretorios
 -----------------------
@@ -152,6 +176,7 @@ mv Personal/ ~/Desktop
 mv Utilitarios-Terminal/ ~/Documents
 ln -s ~/Desktop/Personal/Calistenia calistenia
 ln -s ~/Desktop/Personal/Estudos estudos
+ln -s /var/www/html localhost
 
 echo "
 --------------------------------------
