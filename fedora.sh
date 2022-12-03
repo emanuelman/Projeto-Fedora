@@ -1,4 +1,3 @@
-# OBS: Antes de fazer a instalação mova o arquivo fedora.sh para a diretorio /home/nome_usuario
 
 # --> fedora-workstation-repositories
 echo "
@@ -7,6 +6,7 @@ instalar o gerenciador de repositório de terceiros
 --------------------------------------------------
 "
 sleep 1s
+cd ~
 sudo dnf install fedora-workstation-repositories -y
 sudo dnf install \
 https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
@@ -24,6 +24,7 @@ instalar google, brave, qutebrowser && torbrowser
 -------------------------------------------------
 "
 sleep 1s
+cd ~
 #google
 sudo dnf config-manager --set-enabled google-chrome -y
 sudo dnf install google-chrome-stable -y
@@ -44,6 +45,7 @@ telegram
 --------
 "
 sleep 1s
+cd ~
 sudo dnf install telegram-desktop -y
 
 # --> utilitarios do terminal
@@ -53,6 +55,7 @@ instalar utilitarios do terminal
 --------------------------------
 "
 sleep 1s
+cd ~
 sudo dnf install vim -y
 sudo dnf install tmux -y
 sudo dnf install ranger -y
@@ -72,6 +75,7 @@ instalar gimp, kdenlive, Obs-Studio && FlameShot
 ------------------------------------------------
 "
 sleep 1s
+cd ~
 #gimp
 sudo dnf install gimp -y
 #kdenlive
@@ -87,15 +91,32 @@ echo "
 instalar nerd-fonts
 -------------------
 "
+cd ~
+sudo mkdir /usr/local/share/fonts/
 sudo mkdir /usr/local/share/fonts/ms_fonts
-unzip Hack-v3.003-ttf.zip
-sudo mv ttf/*.ttf /usr/local/share/fonts/ms_fonts
-sudo chown root:staff /usr/local/share/fonts/ms_fonts -R
+mv Projeto-Fedora/nerd-font.zip ~
+unzip nerd-font.zip
+sudo mv *.ttf /usr/local/share/fonts/ms_fonts
+sudo mv *.otf /usr/local/share/fonts/ms_fonts
+sudo chown root:chmod777 /usr/local/share/fonts/ms_fonts -R
 sudo chmod 644 /usr/local/share/fonts/ms_fonts/* -R
 sudo chmod 755 /usr/local/share/fonts/ms_fonts
 cd /usr/local/share/fonts/ms_fonts
 sudo fc-cache -fv
 cd ~
+
+echo "
+------
+python
+------
+"
+sleep 1s
+cd ~
+pip install pynvim
+pip install pyautogui
+pip install pandas
+pip install flask
+sudo yum install python3-tkinter
 
 # --> lamp
 echo "
@@ -104,6 +125,7 @@ instalar mariadb, php && apache
 -------------------------------
 "
 sleep 1s
+cd ~
 sudo dnf install httpd -y
 sudo dnf install php -y
 sudo dnf install mariadb mariadb-server -y
@@ -115,6 +137,7 @@ instalar zsh && ohmyzsh
 -----------------------
 "
 sleep 1s
+cd ~
 sudo dnf install util-linux-user -y
 sudo dnf install zsh -y
 echo "Congigure o zsh..."
@@ -128,6 +151,7 @@ instalar o neovim && vim
 ------------------------
 "
 sleep 1s
+cd ~
 #dependencias
 sudo dnf install python3-pip -y
 pip install pynvim -y
@@ -139,7 +163,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 #configurar
 mkdir .config/nvim/
-cd Projeto-Fedora/
+cd ~/Projeto-Fedora/
 mv init.vim ~/.config/nvim
 cp coc-settings.json ~/.config/nvim
 #lembre-se de etrar no arquivo init.vim e dar o comando :PlugInstall
@@ -150,21 +174,11 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 #configurar
 rm -f .vimrc
-cd Projeto-Fedora/
-mv .vimrc ~
-mv coc-settings.json ~
+mv ~/Projeto-Fedora/.vimrc ~
+mv ~/Projeto-Fedora/coc-settings.json ~
+cd ~
 #lembre-se de etrar no arquivo vimrc e dar o comando :PlugInstall
 
-echo "
-------
-python
-------
-"
-sleep 1s
-pip install pyautogui
-pip install pandas
-pip install flask
-sudo yum install python3-tkinter
 echo "
 -----------------------
 organizar os diretorios
@@ -172,8 +186,8 @@ organizar os diretorios
 "
 sleep 1s
 cd ~
-mv Personal/ ~/Desktop
-mv Utilitarios-Terminal/ ~/Documents
+mkdir ~/Desktop/Personal
+mkdir ~/Documents/Utilitarios_Terminal
 ln -s ~/Desktop/Personal/Calistenia calistenia
 ln -s ~/Desktop/Personal/Estudos estudos
 ln -s /var/www/html localhost
@@ -184,5 +198,5 @@ instalar e configurar o bspwm && sxhkd
 --------------------------------------
 "
 # --> bspwm
+sleep 1s
 sudo dnf install -y git inxi && cd /tmp && git clone https://github.com/thespation/dpux_bspwm && chmod 755 dpux_bspwm/* -R && cd dpux_bspwm/ && ./instalar.sh
-
