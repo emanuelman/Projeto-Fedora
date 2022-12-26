@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
 
-# --> fedora-workstation-repositories
+##### COMECO DAS FUNCOES #####
+function fedora_workstation_repositories(){
 echo "
 --------------------------------------------------
 instalar o gerenciador de repositório de terceiros
@@ -8,47 +10,39 @@ instalar o gerenciador de repositório de terceiros
 sleep 1s
 cd ~
 sudo dnf install fedora-workstation-repositories -y
-sudo dnf install \
-https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install \
-https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-dnf repolist | grep rpmfusion
-sudo dnf config-manager --set-enabled rpmfusion-free-updates-testing
-sudo dnf config-manager --set-enabled rpmfusion-nonfree-updates-testing
-dnf repolist | grep rpmfusion
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
+sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+sudo dnf repolist | grep rpmfusion -y
+sudo dnf config-manager --set-enabled rpmfusion-free-updates-testing -y
+sudo dnf config-manager --set-enabled rpmfusion-nonfree-updates-testing -y
+sudo dnf repolist | grep rpmfusion -y
+}
 
-# --> navegadores
+function navegadores(){
 echo "
--------------------------------------------------
-instalar google, brave, qutebrowser && torbrowser
--------------------------------------------------
+-----------------------------------------------------------
+instalar google, brave, qutebrowser, torbrowser && telegram
+-----------------------------------------------------------
 "
 sleep 1s
 cd ~
 #google
-sudo dnf config-manager --set-enabled google-chrome -y
-sudo dnf install google-chrome-stable -y
+    sudo dnf config-manager --set-enabled google-chrome -y
+    sudo dnf install google-chrome-stable -y
 #brave
-sudo dnf install dnf-plugins-core -y
-sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/ -y
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc -y
-sudo dnf install brave-browser -y
+    sudo dnf install dnf-plugins-core -y
+    sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/ -y
+    sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc -y
+    sudo dnf install brave-browser -y
 #qutebrowser
-sudo dnf install qutebrowser -y
+    sudo dnf install qutebrowser -y
 #torbrowser
-sudo dnf install torbrowser-launcher
+    sudo dnf install torbrowser-launcher -y
+#telegram
+    sudo dnf install telegram-desktop -y
+}
 
-# --> redes sociais
-echo "
---------
-telegram
---------
-"
-sleep 1s
-cd ~
-sudo dnf install telegram-desktop -y
-
-# --> utilitarios do terminal
+function utilitarios_terminal(){
 echo "
 --------------------------------
 instalar utilitarios do terminal
@@ -67,25 +61,35 @@ sudo dnf install pulseaudio-utils -y
 sudo dnf install alsa-utils -y
 sudo dnf install nmap -y
 sudo dnf install youtube-dl -y
+}
 
-# --> edicao de imagem e video
+function edicao_de_imagem_e_video(){
 echo "
-------------------------------------------------
-instalar gimp, kdenlive, Obs-Studio && FlameShot
-------------------------------------------------
+----------------------------------------------
+instalar gimp, Piviti, Obs-Studio && FlameShot
+----------------------------------------------
 "
 sleep 1s
 cd ~
 #gimp
-sudo dnf install gimp -y
-#kdenlive
-flatpak install --from https://flathub.org/repo/appstream/org.kde.kdenlive.flatpakref -y
+    sudo dnf install gimp -y
+#piviti
+    #enable:
+        flatpak remote-modify --enable flathub
+    #install:
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        flatpak install flathub org.pitivi.Pitivi
+    #updating:
+        #flatpak update org.pitivi.Pitivi
+    #unistalling:
+        #flatpak uninstall org.pitivi.Pitivi
 #obs-studio
-sudo dnf install obs-studio -y
+    sudo dnf install obs-studio -y
 #flameshot
-sudo dnf install flameshot -y
+    sudo dnf install flameshot -y
+}
 
-# --> fonts
+function instalar_fonts(){
 echo "
 -------------------
 instalar nerd-fonts
@@ -104,7 +108,9 @@ sudo chmod 755 /usr/local/share/fonts/ms_fonts
 cd /usr/local/share/fonts/ms_fonts
 sudo fc-cache -fv
 cd ~
+}
 
+function bibliotecas_python(){
 echo "
 ------
 python
@@ -112,13 +118,15 @@ python
 "
 sleep 1s
 cd ~
-pip install pynvim
-pip install pyautogui
-pip install pandas
-pip install flask
-sudo yum install python3-tkinter
+sudo dnf install python3-pip -y
+sudo yum install python3-tkinter -y
+pip install pynvim -y
+pip install pyautogui -y
+pip install pandas -y
+pip install flask -y
+}
 
-# --> lamp
+function lamp(){
 echo "
 -------------------------------
 instalar mariadb, php && apache
@@ -129,8 +137,9 @@ cd ~
 sudo dnf install httpd -y
 sudo dnf install php -y
 sudo dnf install mariadb mariadb-server -y
+}
 
-# --> terminal
+function terminal(){
 echo "
 -----------------------
 instalar zsh && ohmyzsh
@@ -140,11 +149,11 @@ sleep 1s
 cd ~
 sudo dnf install util-linux-user -y
 sudo dnf install zsh -y
-echo "Congigure o zsh..."
-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
+}
 
-# --> neovim && vim
+function neovim_and_vim(){
+
 echo "
 ------------------------
 instalar o neovim && vim
@@ -153,32 +162,30 @@ instalar o neovim && vim
 sleep 1s
 cd ~
 #dependencias
-sudo dnf install python3-pip -y
-pip install pynvim -y
-sudo dnf install neovim nodejs git -y
+    sudo dnf install neovim nodejs git -y
 #neovim
-cd ~
-#instalar o plug para o neovim
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+    cd ~
+    #instalar o plug para o neovim
+        sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-#configurar
-mkdir .config/nvim/
-cd ~/Projeto-Fedora/
-mv init.vim ~/.config/nvim
-cp coc-settings.json ~/.config/nvim
-#lembre-se de etrar no arquivo init.vim e dar o comando :PlugInstall
+    #configurar
+        mkdir .config/nvim/
+        mv ~/Projeto-Fedora/init.vim ~/.config/nvim
+        mv ~/Projeto-Fedora/coc-settings.json ~/.config/nvim
+    #lembre-se de etrar no arquivo init.vim e dar o comando :PlugInstall
 #vim
-cd ~
-#instalar o plug para o vim
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-#configurar
-rm -f .vimrc
-mv ~/Projeto-Fedora/.vimrc ~
-mv ~/Projeto-Fedora/coc-settings.json ~
-cd ~
-#lembre-se de etrar no arquivo vimrc e dar o comando :PlugInstall
+    cd ~
+    #instalar o plug para o vim
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    #configurar
+        rm -f .vimrc
+        mv ~/Projeto-Fedora/.vimrc ~
+        mv ~/Projeto-Fedora/coc-settings.json ~
+        cd ~
+    #lembre-se de etrar no arquivo vimrc e dar o comando :PlugInstall
+}
 
+function organizar_diretorios(){
 echo "
 -----------------------
 organizar os diretorios
@@ -189,9 +196,12 @@ cd ~
 mkdir ~/Desktop/Personal
 mkdir ~/Documents/Utilitarios_Terminal
 ln -s ~/Desktop/Personal/Calistenia calistenia
+ln -s Desktop/Personal/Projetos projetos
 ln -s ~/Desktop/Personal/Estudos estudos
 ln -s /var/www/html localhost
+}
 
+function bspwm(){
 echo "
 --------------------------------------
 instalar e configurar o bspwm && sxhkd
@@ -199,4 +209,53 @@ instalar e configurar o bspwm && sxhkd
 "
 # --> bspwm
 sleep 1s
-sudo dnf install -y git inxi && cd /tmp && git clone https://github.com/thespation/dpux_bspwm && chmod 755 dpux_bspwm/* -R && cd dpux_bspwm/ && ./instalar.sh
+sudo dnf install -y git inxi && cd /tmp && git clone https://github.com/thespation/dpux_bspwm && chmod 755 dpux_bspwm/* -R && cd dpux_bspwm/ && ./instalar.sh -y
+}
+
+function verificar(){
+exitStatus=$?
+if [ $exitStatus -eq 0 ]; then
+    echo ""
+elif [ $exitStatus -ne 0 ]; then
+    echo "ERRO!"
+    echo "status de saida: $exitStatus?"
+    exit
+fi
+}
+
+function executar(){
+fedora_workstation_repositories
+verificar
+
+navegadores
+verificar
+
+utilitarios_terminal
+verificar
+
+edicao_de_imagem_e_video
+verificar
+
+instalar_fonts
+verificar
+
+bibliotecas_python
+verificar
+
+lamp
+verificar
+
+terminal
+verificar
+
+neovim_and_vim
+verificar
+
+organizar_diretorios
+verificar
+}
+#####FINAL DAS FUNCOES#####
+
+executar
+#OBS: Não vou ferificar a "função bspwm"
+bspwm
