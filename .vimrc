@@ -283,3 +283,6 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" fonts:
+"       https://www.youtube.com/watch?v=lm7y2hI6zME&t=2400s
+"       https://www.manualdocodigo.com.br/vim-basico/
