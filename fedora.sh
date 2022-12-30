@@ -37,7 +37,8 @@ cd ~
 #qutebrowser
     sudo dnf install qutebrowser -y
 #torbrowser
-    sudo dnf install torbrowser-launcher -y
+    wget https://www.torproject.org/dist/torbrowser/12.0.1/tor-browser-linux64-12.0.1_ALL.tar.xz
+    tar -xvjf tor-browser-linux64-12.0.1_ALL.tar.xz
 #telegram
     sudo dnf install telegram-desktop -y
 }
