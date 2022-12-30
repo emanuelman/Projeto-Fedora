@@ -253,9 +253,10 @@ verificar
 
 organizar_diretorios
 verificar
+
+#OBS: Não vou ferificar a "função bspwm"
+bspwm
 }
 #####FINAL DAS FUNCOES#####
 
 executar
-#OBS: Não vou ferificar a "função bspwm"
-bspwm
