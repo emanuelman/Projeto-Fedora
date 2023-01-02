@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#OBS: Mova o arquivo "fedora.sh" para o diretorio /home/usuario antes de executa-lo
+
 ##### COMECO DAS FUNCOES #####
 function fedora_workstation_repositories(){
 echo "
