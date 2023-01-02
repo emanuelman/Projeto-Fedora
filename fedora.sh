@@ -62,6 +62,10 @@ sudo dnf install pulseaudio-utils -y
 sudo dnf install alsa-utils -y
 sudo dnf install nmap -y
 sudo dnf install youtube-dl -y
+sudo dnf install tilix -y
+sudo wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
+sudo tar -xvjf ngrok-v3-stable-linux-amd64.tgz
+sudo mv ngrok /bin/
 }
 
 function edicao_de_imagem_e_video(){
@@ -186,22 +190,6 @@ cd ~
     #lembre-se de etrar no arquivo vimrc e dar o comando :PlugInstall
 }
 
-function organizar_diretorios(){
-echo "
------------------------
-organizar os diretorios
------------------------
-"
-sleep 1s
-cd ~
-mkdir ~/Desktop/Personal
-mkdir ~/Documents/Utilitarios_Terminal
-ln -s ~/Desktop/Personal/Calistenia calistenia
-ln -s Desktop/Personal/Projetos projetos
-ln -s ~/Desktop/Personal/Estudos estudos
-ln -s /var/www/html localhost
-}
-
 function bspwm(){
 echo "
 --------------------------------------
@@ -250,9 +238,6 @@ terminal
 verificar
 
 neovim_and_vim
-verificar
-
-organizar_diretorios
 verificar
 
 #OBS: Não vou ferificar a "função bspwm"
