@@ -66,7 +66,7 @@ sudo dnf install nmap -y
 sudo dnf install youtube-dl -y
 sudo dnf install tilix -y
 sudo wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
-sudo tar -xvjf ngrok-v3-stable-linux-amd64.tgz
+sudo tar -xvsf ngrok-v3-stable-linux-amd64.tgz
 sudo mv ngrok /bin/
 }
 
@@ -127,10 +127,10 @@ sleep 1s
 cd ~
 sudo dnf install python3-pip -y
 sudo yum install python3-tkinter -y
-pip install pynvim -y
-pip install pyautogui -y
-pip install pandas -y
-pip install flask -y
+pip install pynvim
+pip install pyautogui
+pip install pandas
+pip install flask
 }
 
 function lamp(){
