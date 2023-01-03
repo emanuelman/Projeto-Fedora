@@ -177,19 +177,15 @@ cd ~
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     #configurar
         mkdir .config/nvim/
-        mv ~/Projeto-Fedora/init.vim ~/.config/nvim
-        mv ~/Projeto-Fedora/coc-settings.json ~/.config/nvim
+        sudo cp ~/Projeto-Fedora/init.vim ~/.config/nvim
+        sudo cp ~/Projeto-Fedora/coc-settings.json ~/.config/nvim
     #lembre-se de etrar no arquivo init.vim e dar o comando :PlugInstall
 #vim
     cd ~
-    #instalar o plug para o vim
-        curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    #configurar
-        rm -f .vimrc
-        mv ~/Projeto-Fedora/.vimrc ~
-        mv ~/Projeto-Fedora/coc-settings.json ~
-        cd ~
-    #lembre-se de etrar no arquivo vimrc e dar o comando :PlugInstall
+    sudo dnf install vim -y
+    git clone https://github.com/chxuan/vimplus.git ~/.vimplus
+    cd ~/.vimplus
+    ./install.sh
 }
 
 function bspwm(){
