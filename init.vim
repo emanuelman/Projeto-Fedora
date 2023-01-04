@@ -1,4 +1,6 @@
 
+":w !sudo tee % (password)"
+
 call plug#begin()
 Plug 'sainnhe/sonokai'
 Plug 'ryanoasis/vim-devicons'
