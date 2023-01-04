@@ -152,6 +152,7 @@ instalar zsh && ohmyzsh
 "
 sleep 1s
 cd ~
+#Assim que te pedir a confirmacao de que é para usar o 'zsh' como padrao digite 'yes' e logo em seguida digite 'exit' para o scrip continuar executando
 sudo dnf install util-linux-user -y
 sudo dnf install zsh -y
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
