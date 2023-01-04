@@ -127,6 +127,7 @@ sudo dnf install python3-pip -y
 sudo yum install python3-tkinter -y
 pip install pynvim
 pip install pyautogui
+pip install paramiko
 pip install pandas
 pip install flask
 }
