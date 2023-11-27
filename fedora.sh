@@ -123,6 +123,7 @@ python
 "
 sleep 1s
 cd ~
+sudo dnf install python3 -y
 sudo dnf install python3-pip -y
 sudo yum install python3-tkinter -y
 pip install pynvim
