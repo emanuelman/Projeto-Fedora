@@ -178,6 +178,7 @@ cd ~
         sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     #configurar
+        cd ~
         mkdir .config/nvim/
         sudo cp ~/Projeto-Fedora/init.vim ~/.config/nvim
         sudo cp ~/Projeto-Fedora/coc-settings.json ~/.config/nvim
