@@ -157,7 +157,7 @@ echo "Assim que te pedir a confirmacao de que é para usar o 'zsh' como padrao d
 echo "E logo em seguida, digite 'exit' para o scrip continuar executando"
 sudo dnf install util-linux-user -y
 sudo dnf install zsh -y
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
+sh -c "$(git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k)" -y #depois abrir o arquivo .zshrc e adicionar o powerlevel10k no ZSH_THEME
 }
 
 function neovim_and_vim(){
@@ -187,17 +187,6 @@ cd ~
     git clone https://github.com/chxuan/vimplus.git ~/.vimplus
     cd ~/.vimplus
     ./install.sh
-}
-
-function bspwm(){
-echo "
---------------------------------------
-instalar e configurar o bspwm && sxhkd
---------------------------------------
-"
-# --> bspwm
-sleep 1s
-sudo dnf install -y git inxi && cd /tmp && git clone https://github.com/thespation/dpux_bspwm && chmod 755 dpux_bspwm/* -R && cd dpux_bspwm/ && ./instalar.sh -y
 }
 
 function verificar(){
@@ -239,8 +228,6 @@ verificar
 neovim_and_vim
 verificar
 
-#OBS: Não vou ferificar a "função bspwm"
-bspwm
 }
 #####FINAL DAS FUNCOES#####
 
