@@ -193,6 +193,24 @@ cd ~
     # :w !sudo tee %
 }
 
+function gpt4all(){
+#https://gpt4all.io/
+# Script de instalação automática do GPT4All no Fedora
+# Diretório de instalação
+install_dir="$HOME/gpt4all"
+# URL do instalador
+installer_url="https://gpt4all.io/installers/gpt4all-installer-linux.run"
+# Download do instalador
+cd ~
+wget "$installer_url" -O gpt4all-installer-linux.run
+# Conceder permissões de execução
+chmod +x gpt4all-installer-linux.run
+# Executar instalador sem interação
+./gpt4all-installer-linux.run --mode unattended --installdir "$install_dir"
+# Mensagem de conclusão
+echo "Instalação do GPT4All concluída em $install_dir"
+}
+
 function verificar(){
 exitStatus=$?
 if [ $exitStatus -eq 0 ]; then
@@ -232,6 +250,8 @@ verificar
 neovim_and_vim
 verificar
 
+gpt4all
+verificar
 }
 #####FINAL DAS FUNCOES#####
 
